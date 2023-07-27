@@ -89,8 +89,27 @@
         //    * If the profile is **missing** an `active` prop, return the string "impossible to ascertain status"
         // 🌟 HINT: to confirm the existence of a prop, check that its value is not undefined
        
+        if (profile.active === undefined) {
+          return "impossible to ascertain status";
+        }
+        if (profile.active === false && profile.reason === undefined) {
+          return "confirm status manually";
+        }
+        if (profile.active === true && reason === undefined) {
+          return "confirm status manually";
+        }
+        if (profile.active === true) {
+          profile.active = false
+          profile.reason = reason
+          return profile;
+        }
+        if (profile.active === false) {
+          profile.active = true;
+          delete profile.reason;
+          return profile;
+        }
       }
-
+      
       // 👉 CHALLENGE 2
       function mineSweeper(grid, x, y) {
         // 🧠 mineSweeper takes a grid as its first argument, and coordinates x and y as the second and third args
@@ -116,7 +135,6 @@
           return "🟥 💀";
         } else {
           return "🟦 🥳";
-          console.log();
         }
       }
 
@@ -186,6 +204,7 @@
         // 🌟 HINT: at each iteration, if the current character is an "X", replace it with the result of popping a digit from the number
         // 🌟 HINT: if you'd rather loop forwards, use `shift` instead of `pop`
       }
+
       // 👉 CHALLENGE 6 (bonus, NOT graded)
       function diceRolls() {
         // 🧠 diceRolls takes no arguments and returns a number
