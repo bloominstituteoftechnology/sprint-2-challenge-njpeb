@@ -88,7 +88,7 @@
         //    * If the profile is active but it has a `reason` prop, return the string "confirm status manually"
         //    * If the profile is **missing** an `active` prop, return the string "impossible to ascertain status"
         // 🌟 HINT: to confirm the existence of a prop, check that its value is not undefined
-       
+
         if (profile.active === undefined) {
           return "impossible to ascertain status";
         }
@@ -99,8 +99,8 @@
           return "confirm status manually";
         }
         if (profile.active === true) {
-          profile.active = false
-          profile.reason = reason
+          profile.active = false;
+          profile.reason = reason;
           return profile;
         }
         if (profile.active === false) {
@@ -109,7 +109,7 @@
           return profile;
         }
       }
-      
+
       // 👉 CHALLENGE 2
       function mineSweeper(grid, x, y) {
         // 🧠 mineSweeper takes a grid as its first argument, and coordinates x and y as the second and third args
@@ -203,6 +203,27 @@
         // 🌟 HINT: instead of looping over the number's digits, loop backwards over a template "(XXX) XXX-XXXX"
         // 🌟 HINT: at each iteration, if the current character is an "X", replace it with the result of popping a digit from the number
         // 🌟 HINT: if you'd rather loop forwards, use `shift` instead of `pop`
+
+        let template = "(XXX) XXX-XXXX";
+        let result = [];
+        if (string.length !== 10) {
+          return "type a 10-digit number";
+        }
+        for (let i = 0; i < string.length; i++) {
+          if (!Number.isInteger(parseInt(string[i]))) {
+            return "invalid phone number";
+          }
+        }
+        let j = 0;
+        for (let i = 0; i < template.length; i++) {
+          if (template[i] === "X") {
+            result.push(string[j]);
+            j++;
+          } else {
+            result.push(template[i]);
+          }
+        }
+        return result.join("");
       }
 
       // 👉 CHALLENGE 6 (bonus, NOT graded)
@@ -477,9 +498,9 @@
                 console.log(`\t✅ Test ${idx + 1} passes`);
               else
                 console.log(`\t❌ Test ${idx + 1} fails:
-        ${func.name}(${result[3].map(JSON.stringify)})
-        👉 should return ${JSON.stringify(result[1])}
-        👉 but returns ${JSON.stringify(result[2])}`);
+              ${func.name}(${result[3].map(JSON.stringify)})
+              👉 should return ${JSON.stringify(result[1])}
+              👉 but returns ${JSON.stringify(result[2])}`);
             });
         }
         const gridElems = [
